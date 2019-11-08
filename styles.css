@@ -1,13 +1,31 @@
-body {
+//----LOGIN PAGE----//
+.backgroundImage {
+	align-items: center;
+	background-image: url('login-background.jpg');
+	opacity: 0.2;
+}
+
+.gridLogin {
+	background-color: white;
+}
+
+
+//----DASHBOARD----//
+body, h1 {
 	font-family: Arial Rounded MT Bold;
+}
+
+head {
+	height: 50px;
+	width: auto;
 }
 
 header {
 	background-color: black;
 }
 
-.logInButton {
-	
+.grid {
+	display: flex;
 }
 
 .mainBar {
@@ -18,14 +36,34 @@ header {
 	background-color: #ebebe0;
 }
 
-.submitButton {
-
-}
-
-.userName .password .emailAddress .firstName .lastName {
+.userName, .password, .emailAddress, .firstName, .lastName {
 	background-color: #f5f5f0;
 }
 
-.div > .ul > .li > .img {
-	width: 30%;
+.submitButton, .logInButton {
+	background-color:  #b35900;
 }
+
+div > ul > li > img {
+	height: 20px;
+	width: 30px;
+}
+
+div > header > p > img {
+	height: 20px;
+	width: 30px;
+}
+
+//----NEWUSER-----//
+
+
+//----ADD ISSUE----//
+
+
+//----LOGOUT----//
+
+
+
+
+
+
