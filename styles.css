@@ -1,0 +1,31 @@
+body {
+	font-family: Arial Rounded MT Bold;
+}
+
+header {
+	background-color: black;
+}
+
+.logInButton {
+	
+}
+
+.mainBar {
+	background-color: #ffcc99;
+}
+
+.sideBar {
+	background-color: #ebebe0;
+}
+
+.submitButton {
+
+}
+
+.userName .password .emailAddress .firstName .lastName {
+	background-color: #f5f5f0;
+}
+
+.div > .ul > .li > .img {
+	width: 30%;
+}
