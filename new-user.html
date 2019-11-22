@@ -3,7 +3,7 @@
 		<head>
 			<meta charset="utf-8">
 			<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
-			<title>Dashboard</title>
+			<title>New User</title>
 			<link rel="stylesheet" type="text/css" href="styles.css">
 		</head>
 		<body>
@@ -23,30 +23,31 @@
 						<a href="https:logout.com/html/"><img src="logout.png">Logout</a><br>
 					</div>
 					<div id = "mainBar">
-						<h1>Issues</h1>
-						<input id = "newIssue" type="submit" name="newIssue" value="Create new Issue">
-						<br>
+						<h1>New User</h1>
+						<form>
+							First Name
+							<br>
+							<input id = "firstName" type="text" name="firstname">
+							<br><br>
 
-						Filter By:
-						<input type="dropdown" name="">
+							Last Name
+							<br>
+							<input id = "lastName" type="text" name="lastname">
+							<br><br>
 
+							Password
+							<br>
+							<input id = "password" type="password" name="password">
+							<br><br>
 
-						<table>
-							<th>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</th>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</hr>
-						</table>
+							Email Address
+							<br>
+							<input id = "emailAddress" type="email" name="emailaddress">
+							<br><br>
+
+							<input id = "submitButton" type="submit" name="submit">
+							<br>
+						</form>
 					</div>
 				</div>					
 		</body>
