@@ -10,5 +10,5 @@
 Contributers:
 Andrew-Lloyd Small  620109249
 Daniel Battick      620110004
-Sabreen Hassan       620059776
-Tyler Thoman        620120453
+Sabreen Hassan      620059776
+Tyler Thomas        620120453
