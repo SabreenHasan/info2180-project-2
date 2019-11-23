@@ -1,5 +1,5 @@
-@import url("https://use.fontawesome.com/releases/v5.3.1/css/all.css");
-//----LOGIN PAGE----//
+@import url("https:/*use.fontawesome.com/releases/v5.3.1/css/all.css");
+/*----LOGIN PAGE----*/
 
 #backdrop {
 	background-image: url('login-background.png');
@@ -41,7 +41,7 @@ div > div > div {
 
 
 
-//----NEW USER----//
+/*----NEW USER----*/
 
 body {
 	 font-family: Verdana, Sans-serif;
@@ -116,7 +116,7 @@ div > a > img {
 }
 
 
-//----DASHBOARD-----//
+/*----DASHBOARD-----*/
 
 #mainBar > h1 > #newIssue {
 	align-items: right;
@@ -141,12 +141,6 @@ div > a > img {
 
 
 
-//----ADD ISSUE----//
+/*----ADD ISSUE----*/
 
-//----LOGOUT----//
-
-
-
-
-
-
+/*----LOGOUT----*/
