@@ -20,3 +20,5 @@ CREATE TABLE Issues(id INTEGER PRIMARY KEY,
 INSERT INTO Users (id, firsname,lastname,password, email, date_joined)
     VALUES (1, A, SMALL, password123,admin@bugme.com,
             CONVERT(VARCHAR(10), GETDATE(), 111));
+
+DESC Issues;
