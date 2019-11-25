@@ -60,7 +60,7 @@ div > a > img {
     height: 30px; 
 }
 
-/*customize login page*/
+/*customize login and logout pages*/
 body #backdrop{
     background-image: src="images/login-background";
 }
@@ -71,13 +71,13 @@ h2 img{
 	margin-right: 15px;
 }
 
-#loginBody{
+#logBody{
     background-image: url("images/login-background.jpg");
     opacity: 75%;
     display: grid;
 }
 
-#loginBody form{
+#logBody form{
     background-color: #ebebe0;
     height: 450px;
     width: 300px;
@@ -89,12 +89,15 @@ h2 img{
     padding-top: 7%;
 }
 
-#loginBody form input{
+#logBody form input{
     height: 20px;
     width: 180px;
+    margin-bottom: 30px;
 }
-#loginBody form input[type=submit]{
+#logBody form input[type=submit]{
     width: 100px;
+    height: 25px;
+    margin-right: 10px;
 }
 
 
