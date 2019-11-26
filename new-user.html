@@ -1,54 +1,60 @@
 <!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="utf-8">
-			<meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
-			<title>New User</title>
-			<link rel="stylesheet" type="text/css" href="styles.css">
-		</head>
-		<body>
-			<header>
-				<div id = "grid">
-					<h4><img src="images/bugMe.png">BugMe Issue Tracker</h4>
-				</div>				
-			</header>
-				<div id = "gridLower">
-					<div id = "sideBar">
-						<a href="https:dashboard.com/html/"><img src="images/home.png">Home</a><br>
-						
-						<a href="https:adduser.com/html/"><img src="images/add-user.png">Add User</a><br>
+<html>
 
-						<a href="https:newissue.com/html/"><img src="images/add-issue.png">New Issue</a><br>
-						
-						<a href="https:logout.com/html/"><img src="images/logout.png">Logout</a><br>
-					</div>
-					<div id = "mainBar">
-						<h1>New User</h1>
-						<form>
-							First Name
-							<br>
-							<input id = "firstName" type="text" name="firstname">
-							<br><br>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0">
+	<title>New User</title>
+	<link rel="stylesheet" type="text/css" href="styles_2.css">
+</head>
 
-							Last Name
-							<br>
-							<input id = "lastName" type="text" name="lastname">
-							<br><br>
+<body>
 
-							Password
-							<br>
-							<input id = "password" type="password" name="password">
-							<br><br>
+	<header>
+		<div id="grid">
+			<h4><img src="images/bugMe.png">BugMe Issue Tracker</h4>
+		</div>
+	</header>
 
-							Email Address
-							<br>
-							<input id = "emailAddress" type="email" name="emailaddress">
-							<br><br>
+	<div id="gridLower">
+		<div id="sideBar">
+			<div>
+				<a href="dashboard.html"><img src="images/home.png">Home</a><br>
+			</div>
+			<div>
+				<a href="new-user.html"><img src="images/add-user.png">Add User</a><br>
+			</div>
+			<div>
+				<a href="issues.html"><img src="images/add-issue.png">New Issue</a><br>
+			</div>
+			<div>
+				<a href="logout.html"><img src="images/logout.png">Logout</a><br>
+			</div>
+		</div>
+		
+		<div id="mainBar">
+			<h1>New User</h1>
+			<form>
 
-							<input id = "submitButton" type="submit" name="submit">
-							<br>
-						</form>
-					</div>
-				</div>					
-		</body>
-	</html>
+				First Name<br>
+				<input id="firstName" type="text" name="firstname"><br>
+
+				Last Name<br>
+				<input id="lastName" type="text" name="lastname"><br>
+
+				Password<br>
+				<input id="password" type="password" name="password"><br>
+
+				Email Address<br>
+				<input id="emailAddress" type="email" name="emailaddress"><br>
+
+				<input id="submitButton" type="submit" name="submit"><br>
+				<br>
+			</form>
+		</div>
+
+	</div>
+
+</body>
+
+</html>
