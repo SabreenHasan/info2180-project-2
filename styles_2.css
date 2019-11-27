@@ -153,6 +153,70 @@ h2 img{
     height: 50px;
 }
 
+/*customize details-page*/
+#detailsMain{
+    display: flex;
+    flex-direction: column;
+	background-color: #ffcc99;
+	float: right;
+    padding: 3em;
+    width: 100%;     
+}
+
+#subMainBar{
+    display: flex;
+    flex-direction: row;
+}
+
+#subMainBar #words{
+    width: 55vw;
+}
+#subMainBar #words #fullDescription{
+    margin-bottom:40px;
+}
+
+#mainRightBar #aboutIssue{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(231, 231, 231);
+    width: 14vw;
+    height:43vh;
+    margin-left: 5vw;
+    margin-bottom: 5vh;
+    border-radius: 3px;
+    border:1px black solid;
+}
+#mainRightBar #aboutIssue p{
+    margin-left: 10px;
+}
+
+
+#mainRightBar #closed{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    width: 14vw;
+    border-radius: 3px;
+    color:white;
+    background-color: rgb(57, 57, 179);
+    height: 30px;
+    text-align: center;
+}
+#mainRightBar #inProgress{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    width: 14vw;
+    border-radius: 3px;
+    color:white;
+    background-color: rgb(42, 151, 42);
+    height: 30px;
+    text-align: center;
+}
+
 
 
 
