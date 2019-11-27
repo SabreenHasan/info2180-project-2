@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <title><?php $issueNameAndID ?></title>
+    <link rel="stylesheet" type="text/css" href="styles_2.css">
+</head>
+
+<body>
+
+    <header>
+        <div id="grid">
+            <h4><img src="images/bugMe.png">BugMe Issue Tracker</h4>
+        </div>
+    </header>
+
+    <div id="gridLower">
+
+        <div id="sideBar">
+            <div>
+                <a href="dashboard.html"><img src="images/home.png">Home</a><br>
+            </div>
+            <div>
+                <a href="new-user.html"><img src="images/add-user.png">Add User</a><br>
+            </div>
+            <div>
+                <a href="new_issue.html"><img src="images/add-issue.png">New Issue</a><br>
+            </div>
+            <div>
+                <a href="logout.html"><img src="images/logout.png">Logout</a><br>
+            </div>
+        </div>
+
+        <div class="mainBar" id="detailsMain">
+
+            <div id="topDiv">
+                <h1 id="detailsTitle">titel</h1>
+                <p id="issueNum"><strong>Issue#</strong></p>
+            </div>
+
+            <div id="subMainBar">
+
+                <div id="words">
+                    <p id="fullDescription"></p>
+
+                    <p id="dateCreated">Issue created on</p>
+                    <p id="dateUpdated">Last updated on</p>
+                </div>
+
+                <div id="mainRightBar">
+
+                    <div id="aboutIssue">
+                        <p id=assignedTO><strong>Assigned To</strong><br></p>
+                        <p id=type><strong>type</strong><br></p>
+                        <p id=priority><strong>Priority</strong><br></p>
+                        <p id=status><strong>Status</strong><br></p>
+                    </div>
+
+                    <div id=closed><strong>Mark as Closed</strong></div><br>
+                    <div id=inProgress><strong>Mark In Progress</strong></div><br>
+                </div>
+            </div>
+
+
+
+
+
+</body>
+
+</html>
