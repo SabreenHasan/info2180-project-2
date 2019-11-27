@@ -6,6 +6,7 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="styles_2.css">
+
 </head>
 
 <body>
@@ -26,15 +27,38 @@
                 <a href="new-user.html"><img src="images/add-user.png">Add User</a><br>
             </div>
             <div>
-                <a href="issues.html"><img src="images/add-issue.png">New Issue</a><br>
+                <a href="new_issue.html"><img src="images/add-issue.png">New Issue</a><br>
             </div>
             <div>
-                <a href="logout/html"><img src="images/logout.png">Logout</a><br>
+                <a href="logout.html"><img src="images/logout.png">Logout</a><br>
             </div>
         </div>
 
-        <div id="mainBar">
-            
+        <div class="mainBar" id="dash">
+
+            <div id="firstRow">
+                <h1>Issues</h1>
+                <p>Create New Issue</p>
+            </div>
+
+            <div id="secondRow">
+                <label><strong>Filter by:</strong></label>
+                <label class="filter"><strong>ALL</strong></label>
+                <label class="filter"><strong>OPEN</strong></label>
+                <label class="filter"><strong>MY TICKETS</strong></label>
+            </div>
+
+            <table>
+                <thead>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>status</th>
+                    <th>Assigned to</th>
+                    <th>Created</th>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+
         </div>
     </div>
 </body>

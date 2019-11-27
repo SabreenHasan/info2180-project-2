@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <title>Issues</title>
+    <link rel="stylesheet" type="text/css" href="styles_2.css">
+</head>
+
+<body>
+
+    <header>
+        <div id="grid">
+            <h4><img src="images/bugMe.png">BugMe Issue Tracker</h4>
+        </div>
+    </header>
+
+    <div id="gridLower">
+
+        <div id="sideBar">
+            <div>
+                <a href="dashboard.html"><img src="images/home.png">Home</a><br>
+            </div>
+            <div>
+                <a href="new-user.html"><img src="images/add-user.png">Add User</a><br>
+            </div>
+            <div>
+                <a href="new_issue.html"><img src="images/add-issue.png">New Issue</a><br>
+            </div>
+            <div>
+                <a href="logout.html"><img src="images/logout.png">Logout</a><br>
+            </div>
+        </div>
+
+        <div class="mainBar">
+            <h1>Create Issue</h1>
+            
+            <form id="newIssue" action="new_issue.php">
+                <label for="title"><strong>Title</strong></label><br>
+                <input name="title" id="title" type="text" maxlength="40" required><br>
+
+                <label for="description"><strong>Description</strong></label><br>
+                <input name="description" id="description" type="text" required><br>
+
+                <label for="assignedTo"><strong>Assigned To</strong></label><br>
+                <select name="assignedTo" id="assignedTo"></select><br>
+
+                <label for="type"><strong>Type</strong></label><br>
+                <select name="type" id="type"></select><br>
+                
+                <label for="priority"><strong>Priority</strong></label><br>
+                <select name="priority" id="priority">
+                    <option>Major</option>
+                    <option>Minor</option>
+                    <option>Critical</option>
+                </select><br>
+
+                <input type="submit" value="Submit">
+            </form>
+
+
+        </div>
+
+    </div>
+</body>
+
+</html>
