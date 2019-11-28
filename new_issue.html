@@ -6,6 +6,8 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <title>Issues</title>
     <link rel="stylesheet" type="text/css" href="styles_2.css">
+    <script src="BugFixer.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body>
@@ -45,9 +47,13 @@
 
                 <label for="assignedTo"><strong>Assigned To</strong></label><br>
                 <select name="assignedTo" id="assignedTo"></select><br>
-
+				<!-- will have to get options from created users-->
                 <label for="type"><strong>Type</strong></label><br>
-                <select name="type" id="type"></select><br>
+                <select name="type" id="type" placeholder="">
+                	<option>Bug</option>
+                    <option>Task</option>
+                    <option>Proposal</option>
+               </select><br>
                 
                 <label for="priority"><strong>Priority</strong></label><br>
                 <select name="priority" id="priority">
@@ -56,7 +62,7 @@
                     <option>Critical</option>
                 </select><br>
 
-                <input type="submit" value="Submit">
+                <button id="submission" type="button" class="button" form="newIssue">Create Issue</button>
             </form>
 
 
