@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0">
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="styles_2.css">
+	<script src="BugFixer.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
 <body id="logBody">
@@ -17,14 +19,16 @@
 			<h2><img src="images/bugMe.png">BugMe Issue Tracker</h2>
 		</header>
 
-		<form>
+		<form id="log">
 			<input id="userName" type="text" name="username" placeholder="Username" required>
 			<br>
 
-			<input id="password" type="password" name="password" placeholder="Password" required>
+			<input id="PW" type="password" name="password" placeholder="Password" required>
 			<br>
 
-			<input id="logInButton" type="submit" name="login" value="Login">
+
+			<button id="logInButton" type="button" class="button" form="log">Login</button>
+			
 			<br>
 		</form>
 
