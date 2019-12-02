@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -6,8 +10,9 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="styles_2.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="BugFixer.js" type="text/javascript"></script>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 
 </head>
 
@@ -29,7 +34,7 @@
                 <a href="new-user.html"><img src="images/add-user.png">Add User</a><br>
             </div>
             <div>
-                <a href="new_issue.html"><img src="images/add-issue.png">New Issue</a><br>
+                <a href="new-issue.html" id ="CI"><img src="images/add-issue.png">New Issue</a><br>
             </div>
             <div>
                 <a href="logout.html"><img src="images/logout.png">Logout</a><br>
@@ -40,17 +45,20 @@
 
             <div id="firstRow">
                 <h1>Issues</h1>
-                <p>Create New Issue</p>
+                <button id = "CIB" type="button" class="filter">Create New Issue</button>
+                
             </div>
 
             <div id="secondRow">
                 <label><strong>Filter by:</strong></label>
-                <label class="filter"><strong>ALL</strong></label>
-                <label class="filter"><strong>OPEN</strong></label>
-                <label class="filter"><strong>MY TICKETS</strong></label>
+                <!--button id = "all" type="button"  class = "filter">ALL</button-->
+                
+                <label id = "all" class="filter">All</label>
+                <label id = "open" class="filter">OPEN</label>
+                <label id = "tickets" class="filter">MY TICKETS</label>
             </div>
 
-            <table>
+            <!--table>
                 <thead>
                     <th>Title</th>
                     <th>Type</th>
@@ -59,7 +67,11 @@
                     <th>Created</th>
                 </thead>
                 <tbody id="tableBody"></tbody>
-            </table>
+            </table-->
+            
+            <div id ="Issues">
+                
+            </div>
 
         </div>
     </div>
