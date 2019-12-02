@@ -1,49 +1,23 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-/*
+session_start();
 $host = getenv('IP');
 $username = 'TC';
 $password = 'Spartan!117';
-$dbname = 'AppDatabase';*/
-
-$host = getenv('IP');
-$username = $_POST['username'];
-$password = $_POST['password'];
 $dbname = 'AppDatabase';
 
-$hash = mt_rand();
-$options = array('cost' => 11);
-
-if (password_verify($password, $hash)) {
-    if (password_needs_rehash($hash, PASSWORD_DEFAULT, $options)) {
-        $newHash = password_hash($password, PASSWORD_DEFAULT, $options);
-    }
-    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
 }
-
-
-$_Session['Created']=$_POST['newFName'];// should store id of current user
-
-}
-
-
-
-
     ?>
     <?php if(isset($_POST['email']) && isset($_POST['password'])): ?>
     <?php
-    session_start();
-    $_Session['UserEmail']= $_POST['email'];
-    $_Session['UserPassword'] =$_POST['password'];
+    //session_start();
+    $_SESSION['UserEmail']= $_POST['email'];
+    /*$_SESSION['UserPassword'] =$_POST['password'];*/
     
-    /*$result = mysql_query("SELECT id FROM mytable WHERE city = 'c7'");
-    if(mysql_num_rows($result) == 0) {
-         // row not found, do stuff...
-    } else {
-        // do other stuff...
-    }*/
+  
     $stmt2 = $conn->prepare('SELECT id,password FROM Users WHERE email =  :word');
     $ma = filter_input(INPUT_POST, 'email',
     FILTER_SANITIZE_SPECIAL_CHARS); 
@@ -53,81 +27,268 @@ $_Session['Created']=$_POST['newFName'];// should store id of current user
     $stmt2->execute();
     
     $locale = $stmt2->fetch(PDO::FETCH_ASSOC);
+   
     if($locale['id']==0){
         $result= "User not Found!";
         
     }
     else{
-        if($_Session['UserPassword']!= $locale['password']){
-            $result = "ERROR: Incorrect Password";
-        }
+        if (password_verify($_POST['password'], $locale['password'])) {
+            
+            if (password_needs_rehash($locale['password'], PASSWORD_DEFAULT, $options)) {
+            $_SESSION['UserPassword'] = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+              }
+              $_SESSION["ID"] = $locale['id'];
+        $cr=$locale['id'];
+        //$result= "Welcome ID#" . $_SESSION['ID'];
+        $result ="Welcome";
+        $stmt2 = $conn->query("SELECT * FROM Issues");
+        
+        $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        //header("Location: dashboard.html"); exit();
+        
+        //header("location: dashboard.html",  true,  301 );  exit;
+           
+         } 
+        
         else{
-        $_Session['ID'] = $locale['id'];
-        $result= "Welcome ID#" . $_Session['ID'];
+        $result ="Incorrect Password";
     }
     }
     
     
     
     ?>
-    <?= $result ?>;
+   
+    <?=$result ?>
+    
+    
     <?php endif ?>
     <?php if(isset($_POST['newLName']) && isset($_POST['newFName'])): ?>
     <?php
-        $_Session['newLname']=$_POST['newLName'];
-        $_Session['newFname']=$_POST['newFName'];
-        $_Session['newPassword']=$_POST['newWord'];
-        $_Session['Date_joined']=$_POST['dateU'];
-        $_Session['newMail'] = $_POST['newMail'];
-        try {
+    $userAdd = "";
+    if(strcmp($_SESSION['UserEmail'],"admin@bugme.com")==0){
+        
+        $_SESSION['newLname']=$_POST['newLName'];
+        $_SESSION['newFname']=$_POST['newFName'];
+        
+        $options = [
+        'cost' => 12,
+         ];
+            $_SESSION['newPassword']= password_hash($_POST['newWord'], PASSWORD_BCRYPT, $options);
+        
+        $_SESSION['Date_joined']=$_POST['dateU'];
+        $_SESSION['newMail'] = $_POST['newMail'];
+    $stmt = $conn->prepare('SELECT count(*) FROM Users WHERE email =  :word');
      
+    
+    $stmt->bindParam(':word', $_SESSION['newMail'], PDO::PARAM_STR); 
+    
+    $stmt->execute();
+    
+    $number_of_rows = $stmt->fetchColumn();
+    if($number_of_rows!=0){
+       $userAdd = "Email already in use - User likely already exists" ;
+    }
+    
+     else{
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     $sql = $conn->prepare('INSERT INTO Users (firstname, lastname, email,password,date_joined) VALUES (?,?,?,?,?)');
     // $conn->exec($sql);
-    $sql->execute([$_Session['newFname'],$_Session['newLname'],$_Session['newMail'], $_Session['newPassword'],$_Session['Date_joined']]);
-    
+    $sql->execute([$_SESSION['newFname'],$_SESSION['newLname'],$_SESSION['newMail'], $_SESSION['newPassword'],$_SESSION['Date_joined']]);
+    $userAdd =" New User created successfully";
+     }
     }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }   
+    else{
+        $userAdd = "Must be logged in as Admin to add new Users";
+    }
     ?>
-    <?= "New record created successfully"?>;
+    <?= $userAdd?>;
     <?php endif ?>
     
-    <?php if(isset($_POST['logoff']) && !empty($_POST['logoff'])): ?>
+    <?php if(isset($_POST['off']) && !empty($_POST['off'])): ?>
         <?php
         session_destroy();?>
-         <p><?= "Now Logging Off..."?></p>;
+         <p><?= "Now logging Off..."?></p>;
     <?php endif ?>
     
     <?php if(isset($_POST['title']) && isset($_POST['description'])): ?>
     <?php
-        $_Session['Title']= $_POST['title'];
-        $_Session['Description'] =$_POST['description'];
-        $_Session['Type']=$_POST['type'];
-        $_Session['Assigned']=$_POST['assignedTo'];
-        $_Session['Created']=$_POST['dateI'];
-        $_Session['Updated']= $_POST['dateI'];
-        $_Session['Priority'] = $_POST['priority'];
-        $_Session['CreatedBy']=$_Session['ID'];// should store id of current user
-        try {
+    //session_start();
+        $_SESSION['Title']= $_POST['title'];
+        $_SESSION['Description'] =$_POST['description'];
+        $_SESSION['Type']=$_POST['type'];
+       
+        $_SESSION['Assigned']=$_POST['assignedTo'];
+        $_SESSION['Created']=$_POST['dateI'];
+        $_SESSION['Updated']= $_POST['dateI'];
+        $_SESSION['Priority'] = $_POST['priority'];
+        $_SESSION['CreatedBy']=$_SESSION['ID'];// should store id of current user
+        
      
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$sql = "INSERT INTO Users (firstname, lastname, email,password) VALUES (".$_Session['newFname'].",".$_Session['newLname'].",".$_Session['newMail'].",".$_Session['newPassword'].")";
+    //$sql = "INSERT INTO Users (firstname, lastname, email,password) VALUES (".$_SESSION['newFname'].",".$_SESSION['newLname'].",".$_SESSION['newMail'].",".$_SESSION['newPassword'].")";
     $sql = $conn->prepare('INSERT INTO Issues (title, description, type,priority, status,assigned_to,created_by,created,updated) VALUES (?,?,?,?,?,?,?,?,?)');
     // $conn->exec($sql);
-    $sql->execute([$_Session['Title'],$_Session['Description'], $_Session['Type'],$_Session['Priority'],'Open',$_Session['Assigned'],$_Session['CreatedBy'],$_Session['Created'],$_Session['Updated']]);
-    
-    }
-catch(PDOException $e)
-    {
-    echo $sql . "<br>" . $e->getMessage();
-    }   
+    $sql->execute([$_SESSION['Title'],$_SESSION['Description'], $_SESSION['Type'],$_SESSION['Priority'],'Open',$_SESSION['Assigned'],$_SESSION["ID"],$_SESSION['Created'],$_SESSION['Updated']]);
+   
+   
     ?>
-    <p><?= "New Issue created successfully"?></p>;
+    <p><?= "New Issue created successfully" .$cr?></p>;
     <?php endif ?>
     
+    <?php 
+    $stmt2 = $conn->query("SELECT * FROM Users ");
+
+    $contents = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    
+    ?>
+    <?php if(isset($_POST['members'])): ?>
+  
+    <select name="assignedTo" id="assignedTo"> 
+         <?php foreach ($contents as $row): ?>
+         <?php if (strlen($row['firstname'])!=0): ?>
+         <option value = <?=$row['id']?>><?= $row['firstname']." ".$row['lastname']?></option><br>;
+         <?php endif ?>
+         <?php endforeach; ?>
+    </select>
+    <?"YOU got them"?>
+    <?php endif ?>
+   
+    <?php if(isset($_POST['Issues'])): ?>
+        <?php if( strcmp($_POST['Issues'],"ALL")==0): ?>
+      <?php
+      $stmt2 = $conn->query("SELECT * FROM Issues");
+
+        $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+         <?php endif ?>
+          
+        <?php if( strcmp($_POST['Issues'],"OPEN")==0): ?>
+      <?php
+      
+      $stmt2 = $conn->query("SELECT * FROM Issues WHERE status =  'Open'");
+
+        $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+         <?php endif ?>
+          
+        <?php if( strcmp($_POST['Issues'],"MY TICKETS")==0): ?>
+      <?php
+      $stmt2 = $conn->prepare("SELECT * FROM Issues WHERE assigned_to = 2");
+        
+        
+        $stmt2->bindParam(':id', $_SESSION["ID"], PDO::PARAM_STR); 
+        
+        $stmt2->execute();
+        
+        $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+         <?php endif ?>
+         
+    <table style="width:100%">
+          <tr>
+            <!--thead-->
+                
+                <th>Title</th>
+                
+                
+                <th>Type</th>
+                <th>Priority</th>
+                <th>status</th>
+                <th>Assigned to</th>
+                <th>Created By</th>
+                <th>Created</th>
+                <th>Updated</th>
+                <!--/thead-->
+            
+          </tr>
+          <?php foreach ($_SESSION['contents'] as $row): ?> 
+          <?php
+          $stmt2 = $conn->prepare('SELECT firstname,lastname FROM Users WHERE id =  :id');
+        
+        
+        $stmt2->bindParam(':id', $row['assigned_to'], PDO::PARAM_STR); 
+        
+        $stmt2->execute();
+        
+        $locale = $stmt2->fetch(PDO::FETCH_ASSOC);
+        ?>
+            <tr>
+              
+              <td><?="#".$row['id']?><a href="details-page.html" class ="Details"><?=$row['title']?></a></td>
+              
+              <td><?=$row['type']?></td>
+              <td><?=$row['priority']?></td>
+              <td class = "OS"><?=$row['status']?></td>
+              
+              <td><?= $locale['firstname']." ". $locale['lastname']?></td>
+              <td><?=$row['created_by']?></td>
+              <td><?=$row['created']?></td>
+              <td><?=$row['updated']?></td>
+            </tr>
+          <?php endforeach; ?>
+          
+        </table>
+    <?php endif ?>
+    
+    <?php if(isset($_POST['Ticket']) && !empty($_POST['Ticket'])): ?>
+    <?php
+        $_SESSION['ticket']= $_POST['Ticket'];
+        ?>
+        
+    <?php endif ?>
+     <?php if(isset($_POST['Details'])): ?>
+     <?php
+        $stmt2 = $conn->prepare('SELECT * FROM Issues WHERE title =  :name');
+        
+        
+        $stmt2->bindParam(':name', $_SESSION['ticket'], PDO::PARAM_STR); 
+        
+        $stmt2->execute();
+        
+        $locale = $stmt2->fetch(PDO::FETCH_ASSOC);
+        $stmt3 = $conn->prepare('SELECT * FROM Users  WHERE id =  :name');
+        
+        
+        $stmt3->bindParam(':name', $locale['assigned_to'], PDO::PARAM_STR); 
+        
+        $stmt3->execute();
+        
+        $person = $stmt3->fetch(PDO::FETCH_ASSOC);
+        $dets = $locale['description'];
+        ?>
+        <?=$locale['id']."|". $locale['title']."|".$dets."|".$locale['type']."|".$locale['created']."|".$locale['priority']."|".$locale['status']."|".$person['firstname']."|".$person['lastname']."|".$locale['updated']?>
+        
+        
+      <?php endif ?>
+      
+       <?php if(isset($_POST['closed']) && isset($_POST['update'])): ?>
+          <?php 
+          $sql = "UPDATE Issues SET updated=?, status=? WHERE id=?";
+            $conn->prepare($sql)->execute([$_POST['update'], "Closed", number_format($_POST['closed'])]);
+       ?>
+       <?= "Updated Successfully"?>
+       <?php endif ?>
+       
+        
+      
+       <?php if(isset($_POST['progress']) && isset($_POST['update'])): ?>
+          <?php 
+          $sql = "UPDATE Issues SET updated=?, status=? WHERE id=?";
+            $conn->prepare($sql)->execute([$_POST['update'], "InProgress", number_format($_POST['progress'])]);
+           // $conn ->prepare($sql);
+           // $conn->execute(array($_POST['update'], "In_Progress", 2));
+       ?>
+       <?= "Updated Progress Successfully"?>
+       <?php endif ?>
+       
+       
+       
+       
+       
+       
+       
