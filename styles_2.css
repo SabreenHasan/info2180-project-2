@@ -3,7 +3,13 @@ body{
     margin:0px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.filter, .info,#issueNum{
+    font-weight: bold;
+}
 
+.OS{
+    color: green;
+}
 header{
     background-color: black;
     display: grid;
@@ -14,14 +20,14 @@ header{
 }
 header img{
     height: 35px;
-	width: 28Px;
-	margin-right: 15px;
+    width: 28Px;
+    margin-right: 15px;
 }
 
 div > a > img {
-	height: 25px;
-	width: 22px;
-	margin-right: 15px;
+    height: 25px;
+    width: 22px;
+    margin-right: 15px;
 }
 
 #gridLower{
@@ -42,8 +48,8 @@ div > a > img {
 
 .mainBar{
     display: grid;
-	background-color: #ffcc99;
-	float: right;
+    background-color: #ffcc99;
+    float: right;
     padding: 3em;
     width: 100%;
 }
@@ -67,8 +73,8 @@ body #backdrop{
 
 h2 img{
     height: 25px;
-	width: 22px;
-	margin-right: 15px;
+    width: 22px;
+    margin-right: 15px;
 }
 
 #logBody{
@@ -157,8 +163,8 @@ h2 img{
 #detailsMain{
     display: flex;
     flex-direction: column;
-	background-color: #ffcc99;
-	float: right;
+    background-color: #ffcc99;
+    float: right;
     padding: 3em;
     width: 100%;     
 }
@@ -216,8 +222,3 @@ h2 img{
     height: 30px;
     text-align: center;
 }
-
-
-
-
-
