@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -6,6 +9,9 @@
     <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <title>Logout</title>
     <link rel="stylesheet" type="text/css" href="styles_2.css">
+    <script src="BugFixer.js" type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
 <body id="logBody">
@@ -16,18 +22,19 @@
             <h2><img src="images/bugMe.png">BugMe Issue Tracker</h2>
         </header>
 
-        <form>
+        <form id = "logOff">
             <p> Are you sure you want to logout?</p><br>
-
-            <input id="cancelLogoutButton" type="submit" name="CancelLogOut" value="Cancel">
-
-            <input id="logoutButton" type="submit" name="logOut" value="LogOut">
+            <button id="cancelLogoutButton" type="button" class="button" form="logOff">Cancel Log Out</button>
+            
+            <button id="logoutButton" type="button" class="button" form="logOff">Confirm Log Out</button>
+            
             <br>
 
         </form>
-
-
+        
+        
     </div>
+    
 
 </body>
 
