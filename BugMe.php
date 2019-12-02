@@ -1,21 +1,32 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-
+/*
 $host = getenv('IP');
 $username = 'TC';
 $password = 'Spartan!117';
+$dbname = 'AppDatabase';*/
+
+$host = getenv('IP');
+$username = $_POST['username'];
+$password = $_POST['password'];
 $dbname = 'AppDatabase';
 
-$conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$hash = mt_rand();
+$options = array('cost' => 11);
+
+if (password_verify($password, $hash)) {
+    if (password_needs_rehash($hash, PASSWORD_DEFAULT, $options)) {
+        $newHash = password_hash($password, PASSWORD_DEFAULT, $options);
+    }
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
 }
 
 
-
-
-
 $_Session['Created']=$_POST['newFName'];// should store id of current user
+
+}
 
 
 
