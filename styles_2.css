@@ -1,0 +1,224 @@
+/*general and new user layout*/
+body{
+    margin:0px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.filter, .info,#issueNum{
+    font-weight: bold;
+}
+
+.OS{
+    color: green;
+}
+header{
+    background-color: black;
+    display: grid;
+    align-content: center;
+    height: 10vh;
+    color: white;
+    padding-left: 30px;
+}
+header img{
+    height: 35px;
+    width: 28Px;
+    margin-right: 15px;
+}
+
+div > a > img {
+    height: 25px;
+    width: 22px;
+    margin-right: 15px;
+}
+
+#gridLower{
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+}
+
+#sideBar{
+    padding-top: 30px;
+    padding-left: 20px;
+    width: 200px;
+    background-color: #ebebe0;
+}
+#sideBar div{
+    margin-bottom: 10px;
+}
+
+.mainBar{
+    display: grid;
+    background-color: #ffcc99;
+    float: right;
+    padding: 3em;
+    width: 100%;
+}
+.mainBar form input{
+    margin-bottom: 30px;
+    border-radius: 3px;
+    border: 0.5px solid black;
+    width: 320px;
+    height: 30px; 
+}
+
+.mainBar form input[type=submit]{
+    width: 150px;
+    height: 30px; 
+}
+
+/*customize login and logout pages*/
+body #backdrop{
+    background-image: src="images/login-background";
+}
+
+h2 img{
+    height: 25px;
+    width: 22px;
+    margin-right: 15px;
+}
+
+#logBody{
+    background-image: url("images/login-background.jpg");
+    opacity: 75%;
+    display: grid;
+}
+
+#logBody form{
+    background-color: #ebebe0;
+    height: 450px;
+    width: 300px;
+    border-radius: 4px;
+    border: 1px black solid;
+    margin-left: 35%;
+    margin-top: 2%;
+    padding-left: 5%;
+    padding-top: 7%;
+}
+
+#logBody form input{
+    height: 20px;
+    width: 180px;
+    margin-bottom: 30px;
+}
+#logBody form input[type=submit]{
+    width: 100px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+
+/*customize dashboard page*/
+#dash{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#firstRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 3%;
+}
+#firstRow p{
+    background-color: rgb(74, 128, 74);
+    border-radius: 4px;
+    height: 30px;
+    width: 200px;
+    text-align: center;
+    color:white;
+    padding-top: 1%;
+}
+
+#secondRow{
+    margin-bottom: 2%;
+}
+#secondRow label{
+    border-radius: 4px;
+    margin-right: 20px;
+    padding:3px;
+}
+
+.mainBar table th{
+    background-color: rgb(212, 212, 212);
+    border-radius: 3px;
+    height:30px;    
+}
+
+/*customize new_issue page*/
+
+.mainBar form select{
+    margin-bottom: 30px;
+    border-radius: 3px;
+    border: 0.5px solid black;
+    width: 320px;
+    height: 30px;
+    color: grey;
+}
+.mainBar form #description{
+    height: 50px;
+}
+
+/*customize details-page*/
+#detailsMain{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffcc99;
+    float: right;
+    padding: 3em;
+    width: 100%;     
+}
+
+#subMainBar{
+    display: flex;
+    flex-direction: row;
+}
+
+#subMainBar #words{
+    width: 55vw;
+}
+#subMainBar #words #fullDescription{
+    margin-bottom:40px;
+}
+
+#mainRightBar #aboutIssue{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(231, 231, 231);
+    width: 14vw;
+    height:43vh;
+    margin-left: 5vw;
+    margin-bottom: 5vh;
+    border-radius: 3px;
+    border:1px black solid;
+}
+#mainRightBar #aboutIssue p{
+    margin-left: 10px;
+}
+
+
+#mainRightBar #closed{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    width: 14vw;
+    border-radius: 3px;
+    color:white;
+    background-color: rgb(57, 57, 179);
+    height: 30px;
+    text-align: center;
+}
+#mainRightBar #inProgress{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 5vw;
+    width: 14vw;
+    border-radius: 3px;
+    color:white;
+    background-color: rgb(42, 151, 42);
+    height: 30px;
+    text-align: center;
+}
