@@ -5,11 +5,32 @@ $host = getenv('IP');
 $username = 'TC';
 $password = 'Spartan!117';
 $dbname = 'AppDatabase';
-
+$options = [
+        'cost' => 12,
+         ];
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+else{
+    if(isset($_POST['admin'])){
+    $stmt = $conn->prepare("SELECT count(*) FROM Users WHERE email =  'admin@bugme.com'");
+     echo "adding admin";
+    
+   // $stmt->bindParam(':word', "admin@bugme.com", PDO::PARAM_STR); 
+    
+    $stmt->execute();
+    
+    $admin_num = $stmt->fetchColumn();
+    if($admin_num<1){
+    $sql = $conn->prepare('INSERT INTO Users (email,password) VALUES (?,?)');
+    // $conn->exec($sql);
+    $sql->execute(['admin@bugme.com',password_hash('password123', PASSWORD_BCRYPT, $options)]);
+    }
+    }
+    }
+
+
     ?>
     <?php if(isset($_POST['email']) && isset($_POST['password'])): ?>
     <?php
@@ -19,21 +40,22 @@ if ($conn->connect_error) {
     
   
     $stmt2 = $conn->prepare('SELECT id,password FROM Users WHERE email =  :word');
-    $ma = filter_input(INPUT_POST, 'email',
-    FILTER_SANITIZE_SPECIAL_CHARS); 
+    $ma = $_POST['email']; 
     
     $stmt2->bindParam(':word', $ma, PDO::PARAM_STR); 
     
     $stmt2->execute();
     
     $locale = $stmt2->fetch(PDO::FETCH_ASSOC);
-   
+    /*$password = "code";
+        $salt = "k*jJlrsH:cY]0^Z^/J2)Pz{)qz";
+        $md5 = md5($salt.$password);*/
     if($locale['id']==0){
         $result= "User not Found!";
         
     }
     else{
-        if (password_verify($_POST['password'], $locale['password'])) {
+        if (password_verify($_POST['password'], $locale['password'])|| (password_hash($_POST['password'],PASSWORD_DEFAULT)==$locale['password'])) {
             
             if (password_needs_rehash($locale['password'], PASSWORD_DEFAULT, $options)) {
             $_SESSION['UserPassword'] = password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
@@ -52,7 +74,7 @@ if ($conn->connect_error) {
          } 
         
         else{
-        $result ="Incorrect Password";
+        $result ="Incorrect Password". password_hash($_POST['password'],PASSWORD_DEFAULT);
     }
     }
     
@@ -72,9 +94,7 @@ if ($conn->connect_error) {
         $_SESSION['newLname']=$_POST['newLName'];
         $_SESSION['newFname']=$_POST['newFName'];
         
-        $options = [
-        'cost' => 12,
-         ];
+        
             $_SESSION['newPassword']= password_hash($_POST['newWord'], PASSWORD_BCRYPT, $options);
         
         $_SESSION['Date_joined']=$_POST['dateU'];
@@ -90,7 +110,9 @@ if ($conn->connect_error) {
     if($number_of_rows!=0){
        $userAdd = "Email already in use - User likely already exists" ;
     }
-    
+    elseif (!filter_input(INPUT_POST, "newMail", FILTER_VALIDATE_EMAIL)){
+        $userAdd="Email is not valid";
+    }
      else{
     // set the PDO error mode to exception
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -110,6 +132,7 @@ if ($conn->connect_error) {
     
     <?php if(isset($_POST['off']) && !empty($_POST['off'])): ?>
         <?php
+        session_unset();
         session_destroy();?>
          <p><?= "Now logging Off..."?></p>;
     <?php endif ?>
@@ -159,32 +182,38 @@ if ($conn->connect_error) {
     <?php endif ?>
    
     <?php if(isset($_POST['Issues'])): ?>
-        <?php if( strcmp($_POST['Issues'],"ALL")==0): ?>
+        <?php if( strcmp($_POST['Issues'],"total")==0): ?>
       <?php
       $stmt2 = $conn->query("SELECT * FROM Issues");
-
+        echo "ALL of it";
         $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         ?>
-         <?php endif ?>
+        
           
-        <?php if( strcmp($_POST['Issues'],"OPEN")==0): ?>
+        <?php elseif( strcmp($_POST['Issues'],"OPEN")==0): ?>
       <?php
       
       $stmt2 = $conn->query("SELECT * FROM Issues WHERE status =  'Open'");
 
         $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         ?>
-         <?php endif ?>
+         
           
-        <?php if( strcmp($_POST['Issues'],"MY TICKETS")==0): ?>
+        <?php elseif( strcmp($_POST['Issues'],"MY TICKETS")==0): ?>
       <?php
-      $stmt2 = $conn->prepare("SELECT * FROM Issues WHERE assigned_to = 2");
-        
+      $stmt2 = $conn-> prepare('SELECT * FROM Issues WHERE assigned_to = :id');
+                       
         
         $stmt2->bindParam(':id', $_SESSION["ID"], PDO::PARAM_STR); 
         
         $stmt2->execute();
         
+        $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <?php else: ?>
+      <?php
+      $stmt2 = $conn->query("SELECT * FROM Issues");
+        echo "Everything";
         $_SESSION['contents'] = $stmt2->fetchAll(PDO::FETCH_ASSOC);
         ?>
          <?php endif ?>
