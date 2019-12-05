@@ -91,9 +91,9 @@ document.addEventListener('click', function (event) {
 		
 		var hr = new XMLHttpRequest();
    
-   	var fn =sanitizeHTML(document.getElementById("firstName").value);
+   	var fn =sanitizeHTML(document.getElementById("firstName").value.trim());
    	
-    var ln =sanitizeHTML(document.getElementById("lastName").value);
+    var ln =sanitizeHTML(document.getElementById("lastName").value.trim());
     var pw =sanitizeHTML(document.getElementById("password").value);
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
@@ -101,7 +101,7 @@ document.addEventListener('click', function (event) {
     var yyyy = today.getFullYear();
     
     today = mm + '/' + dd + '/' + yyyy;
-    var ma = sanitizeHTML(document.getElementById("emailAddress").value);
+    var ma = document.getElementById("emailAddress").value;
     if(ma.length!=0 && pw.length!=0  && ln.length!=0 && fn.length!=0){
     if(checkPassword(pw)==true && checkNames(fn)==true &&checkNames(ln)==true){
     var vars = "newMail="+ma + "&newWord="+pw +"&newFName="+fn+"&newLName="+ln+ "&dateU=" + today;
@@ -250,11 +250,11 @@ document.addEventListener('click', function (event) {
 	     //alert(lg.responseText);
 	    alert(criteria);
 	    document.getElementById("Issues").innerHTML=lg.responseText;
-	    
+	    alert(lg.responseText);
 	    }
     }
 
-    lg.send("Issues="+ criteria);
+    lg.send("Issues="+criteria);
   }
   if(event.target.matches('#closed')){
    alert("closing");
@@ -320,7 +320,7 @@ window.onload = (event) => {
 	    }
     }
 
-    lg.send("Issues=ALL"); 
+    lg.send("Issues=total"); 
     
   
 }; // use this to enter table with help of session variables and maybe ajax request
@@ -374,4 +374,20 @@ var loadMembers = function(){
     }
 
     lg.send("members=show");
+}
+var GetStarted = function(){
+ var lg = new XMLHttpRequest();
+     lg.open("POST", url, true);
+    
+    lg.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    lg.onreadystatechange = function() {
+	    if(lg.readyState == 4 && lg.status == 200) {
+	    // alert("adding admin");
+	    }
+	    else{
+	     //alert("ERROR");
+	    }
+    }
+    lg.send("admin=create");
 }
