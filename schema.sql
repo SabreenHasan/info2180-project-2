@@ -31,5 +31,6 @@ CREATE TABLE IF NOT EXISTS `Issues` (
   PRIMARY KEY  (`id`)
 )ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /* must hash password*/
-INSERT INTO `Users`(email,password) VALUES ('admin@bugme.com','password123');
+/*INSERT INTO `Users`(email,password) VALUES ('admin@bugme.com',SHA1("password123"));
 
+*/
