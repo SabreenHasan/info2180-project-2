@@ -6,7 +6,9 @@ body{
 .filter, .info,#issueNum{
     font-weight: bold;
 }
-
+.filter:hover{
+    background-color: blue;
+}
 .OS{
     color: green;
 }
